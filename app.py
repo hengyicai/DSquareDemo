@@ -10,10 +10,11 @@ import config as cfg
 app = Flask(__name__)
 api = Api(app)
 
-api.add_resource(OriginImage, '/origin_img', endpoint='origin_img')
-api.add_resource(UserPreferImg, '/user_prefer_img', endpoint='user_prefer_img')
-api.add_resource(ResultImg, '/result_img', endpoint='result_img')
+app.config.from_object(cfg)
+
+api.add_resource(OriginImage, '/' + app.config['PREFIX'] + '/origin_img', endpoint='origin_img')
+api.add_resource(UserPreferImg, '/' + app.config['PREFIX'] + '/user_prefer_img', endpoint='user_prefer_img')
+api.add_resource(ResultImg, '/' + app.config['PREFIX'] + '/result_img', endpoint='result_img')
 
 if __name__ == "__main__":
-    app.config.from_object(cfg)
-    app.run(debug=app.config['DEBUG'], host=app.config['HOST'])
+    app.run(debug=app.config['DEBUG'], host=app.config['HOST'], port=app.config['PORT'])
