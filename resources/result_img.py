@@ -18,7 +18,6 @@ import inspect
 
 class ResultImg(Resource):
     def __init__(self):
-        self.__init__()
         self.ACCEPTED_BLEND_FUNCTIONS = [item[1] for item in
                                          inspect.getmembers(blend_modes, predicate=inspect.isfunction)]
 
@@ -35,6 +34,12 @@ class ResultImg(Resource):
         blend_opacity = args["blend_opacity"]
 
         if blend_function not in self.ACCEPTED_BLEND_FUNCTIONS or not 0 <= blend_opacity <= 1:
+            print('accepted blend function is')
+            print(self.ACCEPTED_BLEND_FUNCTIONS)
+            print('request blend function is')
+            print(blend_function)
+            print('request blend_opacity is')
+            print(blend_opacity)
             abort(404)
 
         origin_img_path = os.path.join(setting.ORIGIN_IMGS_ROOT, str(origin_img_uuid) + '.jpg')
