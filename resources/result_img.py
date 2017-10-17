@@ -18,7 +18,7 @@ import inspect
 
 class ResultImg(Resource):
     def __init__(self):
-        self.ACCEPTED_BLEND_FUNCTIONS = [item[1] for item in
+        self.ACCEPTED_BLEND_FUNCTIONS = [item[0] for item in
                                          inspect.getmembers(blend_modes, predicate=inspect.isfunction)]
 
     def get(self):
